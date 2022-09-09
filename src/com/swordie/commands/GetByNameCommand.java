@@ -13,13 +13,11 @@ public class GetByNameCommand extends Command {
     }
 
     @Override
-    public String execute(List<Student> students) {
-        Scanner scanner = new Scanner(System.in);
+    public String execute(List<Student> students, Scanner scanner) {
         List<Student> foundStudents = new ArrayList<>();
 
         System.out.println("Type name of the student");
         String name = scanner.nextLine();
-        scanner.close();
 
         for (Student student : students) {
             if (student.getName().equals(name)) {
@@ -31,6 +29,9 @@ public class GetByNameCommand extends Command {
 
         for (Student student : foundStudents) {
             found.append(student.toString()).append("\n");
+        }
+        if (foundStudents.isEmpty()) {
+            return "There is no students with this name";
         }
         return found.toString();
     }

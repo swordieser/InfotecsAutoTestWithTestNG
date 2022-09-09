@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GetByIdCommand extends Command {
-    public GetByIdCommand(){
+    public GetByIdCommand() {
         number = CommandNumbers.GET_BY_ID.getNumber();
     }
+
     @Override
-    public String execute(List<Student> students) {
-        Scanner scanner = new Scanner(System.in);
+    public String execute(List<Student> students, Scanner scanner) {
         int id = -1;
 
         System.out.println("Type id of the student");
@@ -21,13 +21,12 @@ public class GetByIdCommand extends Command {
         while (id == -1) {
             try {
                 id = scanner.nextInt();
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect input, please type number");
                 id = -1;
             }
         }
-
-        scanner.close();
 
         for (Student student : students) {
             if (student.getId() == id) {

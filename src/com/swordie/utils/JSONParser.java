@@ -30,13 +30,13 @@ public class JSONParser {
     }
 
     public static String parseFromStudentsListToJson(List<Student> students) {
-        if (students.size() == 0){
+        if (students.size() == 0) {
             return "[\n\"students\": [\n{\n}\n]\n}";
         }
         StringBuilder json = new StringBuilder("{\n" +
-                "\"students\": [\n");
+                "\"students\": [");
         for (Student student : students) {
-            json.append("{\n");
+            json.append("\n{\n");
             json.append(student.toString());
             json.append("\n},");
         }

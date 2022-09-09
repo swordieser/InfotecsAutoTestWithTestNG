@@ -1,9 +1,9 @@
 package com.swordie.commands;
 
-import com.swordie.client.FTPClient;
 import com.swordie.utils.Student;
 
 import java.util.List;
+import java.util.Scanner;
 
 public abstract class Command {
     protected int number;
@@ -12,5 +12,5 @@ public abstract class Command {
         return number;
     }
 
-    public abstract String execute(List<Student> students);
+    public abstract String execute(List<Student> students, Scanner scanner);
 }

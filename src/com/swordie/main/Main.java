@@ -22,17 +22,16 @@ import static java.lang.System.exit;
 
 public class Main {
     public static LinkedList<Integer> id = new LinkedList<>();
-
     // 192.168.193.99
     // 172.28.111.196
     // 192.168.0.9
 
     public static void main(String[] args) {
         int maxId = 1000;
+        Scanner scanner = new Scanner(System.in);
         for (int i = 1; i <= maxId; i++) {
             id.add(i);
         }
-        Scanner scanner = new Scanner(System.in);
         List<Student> students;
         Console console = new Console();
 
@@ -45,24 +44,24 @@ public class Main {
         ftpClient.open();
         students = getAllInformationFromServer(ftpClient);
 
-//        while (true) {
-//            int commandId = console.mainMenu(scanner);
-//
-//            manager.setCommandId(commandId);
-//            String answer = manager.executeCommand(students);
-//
-//            System.out.println(answer);
-//
-//            if (answer.equals("exit")){
-//                exit(0);
-//            }
-//        }
-        int commandId = console.mainMenu(scanner);
+        while (true) {
+            int commandId = console.mainMenu(scanner);
 
-        manager.setCommandId(commandId);
-        String answer = manager.executeCommand(students);
+            manager.setCommandId(commandId);
+            String answer = manager.executeCommand(students, scanner);
 
-        System.out.println(answer);
+            System.out.println(answer);
+
+            if (answer.equals("exit")) {
+                exit(0);
+            }
+        }
+//        int commandId = console.mainMenu(scanner);
+//
+//        manager.setCommandId(commandId);
+//        String answer = manager.executeCommand(students);
+//
+//        System.out.println(answer);
     }
 
     private static List<Student> getAllInformationFromServer(FTPClient ftpClient) {
@@ -86,7 +85,7 @@ public class Main {
             Files.deleteIfExists(file.toPath());
             List<Student> students = JSONParser.parseFromJsonToStudentsList(json);
             for (Student student : students) {
-                if (Main.id.contains(student.getId())){
+                if (Main.id.contains(student.getId())) {
                     Main.id.remove((Integer) student.getId());
                 }
             }

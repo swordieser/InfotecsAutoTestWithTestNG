@@ -38,6 +38,7 @@ public class Console {
         while (commandId == -1) {
             try {
                 commandId = scanner.nextInt();
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect input, please type number");
             }

@@ -5,19 +5,22 @@ import com.swordie.commands.*;
 import com.swordie.utils.CommandNumbers;
 import com.swordie.utils.JSONParser;
 import com.swordie.utils.Student;
-import jdk.jfr.events.FileWriteEvent;
 import sun.net.ftp.FtpProtocolException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CommandManager {
-    private int commandId;
     private final ArrayList<Command> commands;
     private final FTPClient ftpClient;
+    private int commandId;
 
     public CommandManager(FTPClient ftpClient) {
         commands = new ArrayList<>();
@@ -29,11 +32,11 @@ public class CommandManager {
         this.ftpClient = ftpClient;
     }
 
-    public String executeCommand(List<Student> students) {
+    public String executeCommand(List<Student> students, Scanner scanner) {
         String answer = "";
         for (Command command : commands) {
             if (command.getNumber() == commandId) {
-                answer = command.execute(students);
+                answer = command.execute(students, scanner);
                 if (commandId == CommandNumbers.ADD.getNumber() || commandId == CommandNumbers.DELETE_BY_ID.getNumber()) {
                     updateServerFile(students, ftpClient);
                 }

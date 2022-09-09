@@ -14,8 +14,7 @@ public class DeleteByIdCommand extends Command {
     }
 
     @Override
-    public String execute(List<Student> students) {
-        Scanner scanner = new Scanner(System.in);
+    public String execute(List<Student> students, Scanner scanner) {
         int id = -1;
 
         System.out.println("Type id of the student");
@@ -23,17 +22,16 @@ public class DeleteByIdCommand extends Command {
         while (id == -1) {
             try {
                 id = scanner.nextInt();
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect input, please type number");
             }
         }
 
-        scanner.close();
-
         for (Student student : students) {
             if (student.getId() == id) {
                 students.remove(student);
-                Main.id.add(id);
+                Main.id.add(0, id);
                 return "Student has been deleted";
             }
         }

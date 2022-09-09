@@ -6,8 +6,7 @@ import com.swordie.utils.Student;
 
 import java.io.IOException;
 import java.util.List;
-
-import static java.lang.System.exit;
+import java.util.Scanner;
 
 public class StopCommand extends Command {
     private final FTPClient ftpClient;
@@ -18,7 +17,7 @@ public class StopCommand extends Command {
     }
 
     @Override
-    public String execute(List<Student> students) {
+    public String execute(List<Student> students, Scanner scanner) {
         try {
             ftpClient.close();
         } catch (IOException e) {

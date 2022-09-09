@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AddCommand extends Command {
-    public AddCommand(){
+    public AddCommand() {
         number = CommandNumbers.ADD.getNumber();
     }
+
     @Override
-    public String execute(List<Student> students) {
-        Scanner scanner = new Scanner(System.in);
+    public String execute(List<Student> students, Scanner scanner) {
         System.out.println("Type name of the student");
         String name = scanner.nextLine();
         int id = Main.id.pop();
