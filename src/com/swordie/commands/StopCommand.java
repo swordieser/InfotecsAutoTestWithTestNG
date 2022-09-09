@@ -25,7 +25,6 @@ public class StopCommand extends Command {
             e.printStackTrace();
         }
         System.out.println("Closed connection with ftp server");
-        exit(0);
-        return "";
+        return "exit";
     }
 }

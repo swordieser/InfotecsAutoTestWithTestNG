@@ -16,7 +16,8 @@ public class AddCommand extends Command {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type name of the student");
         String name = scanner.nextLine();
-        students.add(new Student(Main.id++, name));
+        int id = Main.id.pop();
+        students.add(new Student(id, name));
         return "Successfully added student";
     }
 }

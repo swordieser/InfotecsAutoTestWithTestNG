@@ -21,18 +21,22 @@ public class JSONParser {
         List<Student> students = new ArrayList<>();
         for (String s : matches) {
             String[] strings = s.split(":");
-            int id = Integer.parseInt(strings[1]);
+            int id = Integer.parseInt(strings[1].replaceAll("\\s+", ""));
             String name = strings[3].split("\"")[1];
+
             students.add(new Student(id, name));
         }
         return students;
     }
 
     public static String parseFromStudentsListToJson(List<Student> students) {
+        if (students.size() == 0){
+            return "[\n\"students\": [\n{\n}\n]\n}";
+        }
         StringBuilder json = new StringBuilder("{\n" +
-                "\"students\": [\n" +
-                "{\n");
+                "\"students\": [\n");
         for (Student student : students) {
+            json.append("{\n");
             json.append(student.toString());
             json.append("\n},");
         }

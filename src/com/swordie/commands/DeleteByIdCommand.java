@@ -1,5 +1,6 @@
 package com.swordie.commands;
 
+import com.swordie.main.Main;
 import com.swordie.utils.CommandNumbers;
 import com.swordie.utils.Student;
 
@@ -24,7 +25,6 @@ public class DeleteByIdCommand extends Command {
                 id = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect input, please type number");
-                id = -1;
             }
         }
 
@@ -33,6 +33,7 @@ public class DeleteByIdCommand extends Command {
         for (Student student : students) {
             if (student.getId() == id) {
                 students.remove(student);
+                Main.id.add(id);
                 return "Student has been deleted";
             }
         }
