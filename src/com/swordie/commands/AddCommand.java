@@ -15,9 +15,12 @@ public class AddCommand extends Command {
     @Override
     public String execute(List<Student> students, Scanner scanner) {
         System.out.println("Type name of the student");
+
         String name = scanner.nextLine();
         int id = Main.id.pop();
+
         students.add(new Student(id, name));
+
         return "Successfully added student";
     }
 }

@@ -23,18 +23,17 @@ import static java.lang.System.exit;
 public class Main {
     public static LinkedList<Integer> id = new LinkedList<>();
     // 192.168.193.99
-    // 172.28.111.196
     // 192.168.0.9
 
     public static void main(String[] args) {
         int maxId = 1000;
         Scanner scanner = new Scanner(System.in);
-        for (int i = 1; i <= maxId; i++) {
-            id.add(i);
-        }
         List<Student> students;
         Console console = new Console();
 
+        for (int i = 1; i <= maxId; i++) {
+            id.add(i);
+        }
 
         console.getConnectionInformation(scanner);
 
@@ -42,6 +41,7 @@ public class Main {
         CommandManager manager = new CommandManager(ftpClient);
 
         ftpClient.open();
+
         students = getAllInformationFromServer(ftpClient);
 
         while (true) {
@@ -56,43 +56,49 @@ public class Main {
                 exit(0);
             }
         }
-//        int commandId = console.mainMenu(scanner);
-//
-//        manager.setCommandId(commandId);
-//        String answer = manager.executeCommand(students);
-//
-//        System.out.println(answer);
     }
 
     private static List<Student> getAllInformationFromServer(FTPClient ftpClient) {
         try {
             File file = File.createTempFile("tempStudent", ".txt");
             FileOutputStream fos = new FileOutputStream(file);
+
             ftpClient.getFtp().getFile("students.json", fos);
+
             FileInputStream fis = new FileInputStream(file);
             Scanner scanner = new Scanner(fis);
+
             if (!scanner.hasNext()) {
                 scanner.close();
                 fos.close();
                 fis.close();
+
                 Files.deleteIfExists(file.toPath());
+
                 return new ArrayList<>();
             }
+
             String json = scanner.useDelimiter("\\A").next();
+
             scanner.close();
             fos.close();
             fis.close();
+
             Files.deleteIfExists(file.toPath());
+
             List<Student> students = JSONParser.parseFromJsonToStudentsList(json);
+
             for (Student student : students) {
                 if (Main.id.contains(student.getId())) {
                     Main.id.remove((Integer) student.getId());
                 }
             }
+
             return students;
         } catch (IOException | FtpProtocolException e) {
             e.printStackTrace();
         }
+
         return new ArrayList<>();
     }
 }

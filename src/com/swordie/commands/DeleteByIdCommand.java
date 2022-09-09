@@ -31,7 +31,9 @@ public class DeleteByIdCommand extends Command {
         for (Student student : students) {
             if (student.getId() == id) {
                 students.remove(student);
+
                 Main.id.add(0, id);
+
                 return "Student has been deleted";
             }
         }

@@ -17,6 +17,7 @@ public class GetByNameCommand extends Command {
         List<Student> foundStudents = new ArrayList<>();
 
         System.out.println("Type name of the student");
+
         String name = scanner.nextLine();
 
         for (Student student : students) {
@@ -30,6 +31,7 @@ public class GetByNameCommand extends Command {
         for (Student student : foundStudents) {
             found.append(student.toString()).append("\n");
         }
+
         if (foundStudents.isEmpty()) {
             return "There is no students with this name";
         }

@@ -34,12 +34,15 @@ public class CommandManager {
 
     public String executeCommand(List<Student> students, Scanner scanner) {
         String answer = "";
+
         for (Command command : commands) {
             if (command.getNumber() == commandId) {
                 answer = command.execute(students, scanner);
+
                 if (commandId == CommandNumbers.ADD.getNumber() || commandId == CommandNumbers.DELETE_BY_ID.getNumber()) {
                     updateServerFile(students, ftpClient);
                 }
+
                 break;
             }
         }
@@ -54,18 +57,22 @@ public class CommandManager {
         String json = JSONParser.parseFromStudentsListToJson(students);
         try {
             File file = File.createTempFile("students", ".json");
-//            FileWriter fw = new FileWriter(file);
             FileOutputStream fos = new FileOutputStream(file);
-//            fw.write(json);
+
             fos.write(json.getBytes(StandardCharsets.UTF_8));
+
             FileInputStream fis = new FileInputStream(file);
+
             ftpClient.getFtp().putFile("/students.json", fis);
+
             fos.close();
             fis.close();
             Files.deleteIfExists(file.toPath());
+
             return true;
         } catch (IOException | FtpProtocolException e) {
             System.out.println("Something went wrong, didn't update server file");
+
             return false;
         }
     }

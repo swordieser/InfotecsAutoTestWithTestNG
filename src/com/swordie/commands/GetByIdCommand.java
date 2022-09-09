@@ -24,6 +24,7 @@ public class GetByIdCommand extends Command {
                 scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect input, please type number");
+
                 id = -1;
             }
         }

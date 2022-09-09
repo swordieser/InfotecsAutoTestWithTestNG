@@ -17,14 +17,15 @@ public class Console {
     public void getConnectionInformation(Scanner scanner) {
         System.out.println("Please type server ip");
         server = scanner.nextLine();
+
         System.out.println("Please type your login");
         login = scanner.nextLine();
+
         System.out.println("Please type your password");
         password = scanner.nextLine();
     }
 
     public int mainMenu(Scanner scanner) {
-
         int commandId = -1;
 
         System.out.println("Main menu\n" +
@@ -45,6 +46,7 @@ public class Console {
 
             if (commandId < 1 || commandId > CommandNumbers.values().length) {
                 System.out.println("Please type number from 1 to " + CommandNumbers.values().length);
+
                 commandId = -1;
             }
         }

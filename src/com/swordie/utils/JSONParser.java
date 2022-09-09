@@ -33,15 +33,19 @@ public class JSONParser {
         if (students.size() == 0) {
             return "[\n\"students\": [\n{\n}\n]\n}";
         }
+
         StringBuilder json = new StringBuilder("{\n" +
                 "\"students\": [");
+
         for (Student student : students) {
             json.append("\n{\n");
             json.append(student.toString());
             json.append("\n},");
         }
+
         json.deleteCharAt(json.length() - 1);
         json.append("\n]\n}");
+
         return json.toString();
     }
 }

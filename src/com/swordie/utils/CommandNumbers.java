@@ -7,7 +7,7 @@ public enum CommandNumbers {
     DELETE_BY_ID(4),
     STOP(5);
 
-    int number;
+    final int number;
 
     CommandNumbers(int number) {
         this.number = number;
