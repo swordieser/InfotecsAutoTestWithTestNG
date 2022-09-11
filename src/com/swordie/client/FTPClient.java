@@ -8,10 +8,10 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
 public class FTPClient {
-    private final String server;
+    private String server;
     private final int port = 21;
-    private final String login;
-    private final String password;
+    private String login;
+    private String password;
     private FtpClient ftp;
 
     public FTPClient(String server, String user, String password) {
@@ -47,5 +47,17 @@ public class FTPClient {
 
     public FtpClient getFtp() {
         return ftp;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

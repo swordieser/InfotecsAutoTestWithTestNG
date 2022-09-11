@@ -39,9 +39,19 @@ public class Main {
 
         FTPClient ftpClient = new FTPClient(console.getServer(), console.getLogin(), console.getPassword());
         CommandManager manager = new CommandManager(ftpClient);
-
         ftpClient.open();
-
+        while (!ftpClient.getFtp().isConnected()) {
+            ftpClient.open();
+            if (ftpClient.getFtp().isConnected()) {
+                break;
+            } else {
+                console.getConnectionInformation(scanner);
+                ftpClient.setServer(console.getServer());
+                ftpClient.setLogin(console.getLogin());
+                ftpClient.setPassword(console.getPassword());
+                manager = new CommandManager(ftpClient);
+            }
+        }
         students = getAllInformationFromServer(ftpClient);
 
         while (true) {
