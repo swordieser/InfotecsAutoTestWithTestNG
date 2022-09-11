@@ -1,4 +1,4 @@
-#InfotecsAutoTest
+# InfotecsAutoTest
 
 Проект с тестами к основному.
 
